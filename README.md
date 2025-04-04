@@ -2,7 +2,7 @@
 
 This web application facilitates the rapid generation of QR codes from URL inputs.
 
-
+Website link : https://priyapatelsp.github.io/qrCodeGenerator/
 
 ## 🚀 Features
 
