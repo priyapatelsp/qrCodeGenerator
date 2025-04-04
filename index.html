@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>QR Code Generator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    .container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 400px; /* Adjusted width for better appearance */
+    }
+
+    h1 {
+      color: #007bff;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      padding: 12px;
+      width: calc(100% - 24px); /* Adjusted width to account for padding */
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box; /* Ensures padding and border are included in element's total width and height */
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #qrcode {
+      margin-top: 20px;
+      display: inline-block; /* Ensure it doesn't take full width */
+    }
+
+    #qrcode canvas {
+      border: 1px solid #eee; /* Add a subtle border to the QR code */
+    }
+
+    #qrcode p {
+      color: red; /* Error message color */
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>QR Code Generator</h1>
+    <input type="text" id="urlInput" placeholder="Enter URL">
+    <button onclick="generateQRCode()">Generate QR Code</button>
+    <div id="qrcode"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <script>
+    function generateQRCode() {
+      const url = document.getElementById('urlInput').value;
+      const qrcodeDiv = document.getElementById('qrcode');
+
+      qrcodeDiv.innerHTML = '';
+
+      if (url) {
+        new QRCode(qrcodeDiv, {
+          text: url,
+          width: 256,
+          height: 256,
+          colorDark: "#000000",
+          colorLight: "#ffffff",
+          correctLevel: QRCode.CorrectLevel.H
+        });
+      } else {
+        const errorParagraph = document.createElement('p');
+        errorParagraph.textContent = "Please enter a URL.";
+        qrcodeDiv.appendChild(errorParagraph);
+      }
+    }
+  </script>
+</body>
+</html>
